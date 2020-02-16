@@ -1,0 +1,11 @@
+.box {
+    -webkit-box-shadow: -9px 10px 5px 0px rgba(176, 174, 176, 1);
+    -moz-box-shadow: -9px 10px 5px 0px rgba(176, 174, 176, 1);
+    box-shadow: -9px 10px 5px 0px rgba(176, 174, 176, 1);
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.stats {
+    margin-bottom: 30px;
+}

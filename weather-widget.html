@@ -1,0 +1,27 @@
+<div class="box">
+
+
+<h2> Daily Weather Forecast for {{::data.weather.location }} </h2>
+   
+  
+  <h3>{{::data.weather.desc}}</h3>
+ <div class="row">
+ <div class="col-sm-6">
+  <img src="https://www.weatherbit.io/static/img/icons/{{::data.weather.icon}}.png">
+    </div>
+   <div class="col-sm-6">
+     
+   
+ <div class="stats">
+
+   
+  <b>Temperature:</b> {{::data.weather.temp}} °C<br>
+   <b>Wind Speed:</b> {{data.weather.windspd}} m/s<br> 
+    <b>Amount of Rain:</b> {{data.weather.precip}} mm<br> 
+   
+     </div>
+      
+   </div>
+  </div>
+  
+  </div>
