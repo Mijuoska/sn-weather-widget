@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-02-16 08:45:13">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Weather Widget</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>747e87e7db9a00108cab1780399619e9</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-02-16 08:45:11</sys_created_on>
+<sys_id>c2239a78db030010f79c146139961995</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-02-16 08:45:11</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_44047977db1640108cab17803996192c</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description/><ignore_cache>false</ignore_cache><is_private>false</is_private><name>weatherbit.api.key</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-01-19 07:24:02</sys_created_on><sys_id>44047977db1640108cab17803996192c</sys_id><sys_mod_count>1</sys_mod_count><sys_name>weatherbit.api.key</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_properties_44047977db1640108cab17803996192c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-01-19 07:37:21</sys_updated_on><type>string</type><value>e395047e790f4bf0a5cbf6e061414312</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=44047977db1640108cab17803996192c"/></record_update>]]></payload>
+<payload_hash>1417169856</payload_hash>
+<remote_update_set display_value="Weather Widget">c2239a78db030010f79c146139961995</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-02-16 08:45:11</sys_created_on>
+<sys_id>4e239a78db030010f79c146139961995</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16fbcbc1de40000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-02-16 08:45:11</sys_updated_on>
+<table/>
+<target_name>weatherbit.api.key</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>53173d3bf5164010880eaace66f71d95</update_guid>
+<update_guid_history>53173d3bf5164010880eaace66f71d95:1417169856,6014b977af164010f4c956b2eece3f77:1701833221</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_38c6e988db1bf3003d13d6aa489619f7</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function() {  /* widget controller */  var c = this;}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.box {
+-webkit-box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+-moz-box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+padding: 20px;
+background-color: #FFFFFF;
+}
+
+.stats {
+ margin-bottom: 30px; 
+}
+
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;weather_at_location&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;Weather at Location&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	
+var city = getUserLocationByIP();
+var weather = getWeatherForecast(city);
+data.weather = weather;
+
+	
+function getUserLocationByIP() {
+        var IP = gs.getSession().getClientIP().toString();
+        try {
+            var r = new sn_ws.RESTMessageV2();
+            r.setEndpoint('http://ip-api.com/json/' + IP);
+            r.setQueryParameter('fields', 'city');
+            r.setHttpMethod('get');
+            var response = r.execute();
+            var responseBody = response.getBody();
+            var httpStatus = response.getStatusCode();
+
+            gs.log(responseBody);
+            gs.log(httpStatus);
+            var json = JSON.parse(responseBody);
+            var city = json.city;
+
+            return city;
+        } catch (ex) {
+            var message = ex.message;
+        }
+}
+	
+function getWeatherForecast(location) {
+		if (location) {
+			 try { 
+ var r = new sn_ws.RESTMessageV2(); 
+ r.setEndpoint('https://api.weatherbit.io/v2.0/forecast/daily'); // can be set up in REST messages
+r.setHttpMethod('get'); 
+r.setQueryParameter('key', gs.getProperty('weatherbit.api.key'));  // included here for demo purpose
+r.setQueryParameter('city', location);	 
+				 
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+
+ var obj = JSON.parse(responseBody);
+
+if (!obj) {
+	return "No weather data could be retrieved for your location";
+}
+
+var weatherObj = {};
+weatherObj.location = obj.city_name;
+weatherObj.desc = obj.data[0].weather.description;
+weatherObj.windspd = Math.floor(obj.data[0].wind_spd * 10) / 10;
+weatherObj.temp = obj.data[0].temp;
+weatherObj.precip = Math.floor(obj.data[0].precip * 1000) / 1000;
+weatherObj.icon = obj.data[0].weather.icon;		
+
+return weatherObj;
+				 
+// end try statement
+}
+			
+catch(ex) {
+ var message = ex.message;
+	gs.log(message);
+}
+
+// if no weather data can be found for location
+			} else {
+				return "Weather information could not be retrieved. No location defined for currently logged in user.";
+			}
+}
+
+}())
+	
+	
+	
+
+
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;miika&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-08-11 11:40:20&lt;/sys_created_on&gt;&lt;sys_id&gt;38c6e988db1bf3003d13d6aa489619f7&lt;/sys_id&gt;&lt;sys_mod_count&gt;73&lt;/sys_mod_count&gt;&lt;sys_name&gt;Weather at Location&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_38c6e988db1bf3003d13d6aa489619f7&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-01-19 07:46:23&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="box"&gt;
+
+
+&lt;h2&gt; Daily Weather Forecast for {{::data.weather.location }} &lt;/h2&gt;
+   
+  
+  &lt;h3&gt;{{::data.weather.desc}}&lt;/h3&gt;
+ &lt;div class="row"&gt;
+ &lt;div class="col-sm-6"&gt;
+  &lt;img src="https://www.weatherbit.io/static/img/icons/{{::data.weather.icon}}.png"&gt;
+    &lt;/div&gt;
+   &lt;div class="col-sm-6"&gt;
+     
+   
+ &lt;div class="stats"&gt;
+
+   
+  &lt;b&gt;Temperature:&lt;/b&gt; {{::data.weather.temp}} °C&lt;br&gt;
+   &lt;b&gt;Wind Speed:&lt;/b&gt; {{data.weather.windspd}} m/s&lt;br&gt; 
+    &lt;b&gt;Amount of Rain:&lt;/b&gt; {{data.weather.precip}} mm&lt;br&gt; 
+   
+     &lt;/div&gt;
+      
+   &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1632582988</payload_hash>
+<remote_update_set display_value="Weather Widget">c2239a78db030010f79c146139961995</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-02-16 08:45:11</sys_created_on>
+<sys_id>8a239a78db030010f79c146139961995</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16fbcc45ec70000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-02-16 08:45:11</sys_updated_on>
+<table/>
+<target_name>Weather at Location</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>a7293dbb6d164010e8db4969b0490bd7</update_guid>
+<update_guid_history>a7293dbb6d164010e8db4969b0490bd7:-1632582988,3a19f577f6164010c8b93aff6c11dc82:-1286906905,06f8b9bb2516401013bba490bac99e13:1816362521,ccf8fdf72416401033c11cf2cd40077c:1808327168,4ae8793b2c164010aa23644a660795f1:-298768366,b9383d3b8116401064fd035a5472dcfe:1430279857,5b47fd3b85164010fa06779b1a7429e9:-1091147704,bb45f5b3f51640109259335ee490091f:1859784621,2605f9771e1640106f081e4ab15b8226:-2125121623,55e439b7b716401091c2b43afabd5ed2:23353545,4412b5f35f16401089d3456205840eb3:1954603581,118131f3a516401083f98faf7b1d336b:-535610704,4031bd7361164010b4e4dd6bd57e7e47:-1166858903,1903132f799a0010d8779126eaadfc3d:1628463253,84f2536b549a00109f5ed618363b31c2:26416346,4dc29be7f69a0010c4e847497c1246b2:1363106507,25ec027d5ea33300c5f7849891f084eb:-1588092870,2bdcc27d59a333002a45f8461aad6008:1275792713,accc427dd9a333009cf8aafecd2fa8aa:-1278952816,5cbc027d33a33300b0b24c42ddef27b5:-1968281343,b37c8e3d30a33300a64bd5f815d60e9d:-544630230,7e6c463dd7a333004d37bb9fd6b49840:-1528202950,2f4d166ddb97f7009fbec994c10ff77f:1467351268,c62d522d3e97f70076cb9e8a585b5e6b:-12514394,71ec526d4297f700699bcdbe0595cc86:103603460,bbacde2db597f700f411be318b4f1e3c:-1141486128,0f9c9e2d1697f700bf5eba19daa90881:-732424382,c9c852697397f7008de616e9efcf71ca:-507221045,32f012d1131fb700c9a10b8da74b8f8f:-1404995815,5de012d13a1fb7007e31e74e7444899b:-1043167776,36d05ad1e41fb70009de3986f57de746:940678039,77c01ad1581fb7007730aef8c027d4a3:-1404995815,e6ae8211281fb7001572c9993d5b2a97:626285945,f58e4a11ca1fb700439c1d6574bed8f8:-1020542424,177eca11fb1fb70051d3eb306ada1452:-633813144,112e4611851fb700ed40d1af3cbdd2c0:-100155763,ce0d46113a1fb7001afd7fe34c9119a9:-1638875748,a78ace1d35dbb7002f2c77b0d39aad3c:-1184325914,1a7aca5dc6dbb700df913aa0cccff9c3:-1638875748,f8a9029d30dbb7004a89daa4c9f2e805:926360396,f4c04d0df19f7700be186c84c3832ba4:-433045712,37704d0d229f77004cbb7a2edc549769:1201464030,eb20450de49f7700a23481471f4ffe46:20627340,75cf740d009f7700a17a58464f91a124:-752444492,b8bf340d739f7700cee16bb325fb9b6d:-16799036,9d9ffcc9059f77009f889cfc6ecf4cab:-409504057,a78f761048973700f7e45e8d09a7a081:-390373905,4d8f7a54c45737008e226bc88d78f780:-768197004,0496fe1886573700272f5b3953ddc82c:450802014,9076ba1829573700996dd0bf7a7b559d:794324390,7326f698d2573700b368ec3623eb1a04:1555966461,1df3ba1842573700764f45082a9a99cb:-386880963,b6d3fe186d573700e9c22d86d4b2ba0e:1520443486,2f63ba184857370051c8f679d1726a8b:-386880963,f513b618e057370011035ace2d877cf3:-1763412802,d9927218655737004c7c442717fb7dd7:1415672410,1e12be541f5737006abc8bd969f16025:-372883358,66613e147257370029254d32e39ae770:-754403337,f4ae2654c75737009ff43bc38d549bbd:1358906802,312e26540b5737007854748f371c7760:-1498829210,81bdee1499573700d7b37fef179c7808:1983056888,897d2e146c573700ac463ce361227558:-1877167480,d59bb1c4915bf3006ff4abb1ac2451d4:-1755008997,a2d87984e35bf30089754617465a8a96:-1704303999,fab83984d65bf300fa2d3f812734db12:-1236299386,62883184b45bf300b4942e2cb4d909a9:-1805129790,1978bd44065bf300e7cf1da2d65165dc:251222296,8f17f544995bf300884ec3520b75904f:1200394273,4f6e2100e55bf30010e0864536f8b933:-200687441,b32ead4c5f1bf30063ac400c8f62899f:1813513502,219de5cc951bf300ec7e173f75b9b19c:425066468,4097e1c8af1bf3004e0e828dddcbc8d3:-1446247669,99672d88bb1bf3007595451e1c7bcdcb:511443995,bcc6e988b51bf300f46d82faa62abff8:1849614831</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_38c6e988db1bf3003d13d6aa489619f7</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function() {  /* widget controller */  var c = this;}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.box {
+-webkit-box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+-moz-box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+box-shadow: -9px 10px 5px 0px rgba(176,174,176,1);
+padding: 20px;
+background-color: #FFFFFF;
+}
+
+.stats {
+ margin-bottom: 30px; 
+}
+
+.time {
+font-size: 12px;
+font-style: italic;
+  
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;weather_at_location&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;Weather at Location&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+var wu = new WeatherUtils();
+var city = wu.getUserLocationByIP();
+var weather = wu.getWeather(city, 'Weather Forecast API', 24);
+data.weather = weather;
+var gdt = new GlideDateTime(weather.ob_time);
+	data.weather.ob_time = gdt.getInternalFormattedLocalTime();
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;miika&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-08-11 11:40:20&lt;/sys_created_on&gt;&lt;sys_id&gt;38c6e988db1bf3003d13d6aa489619f7&lt;/sys_id&gt;&lt;sys_mod_count&gt;57&lt;/sys_mod_count&gt;&lt;sys_name&gt;Weather at Location&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_38c6e988db1bf3003d13d6aa489619f7&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;miika&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-08-29 11:12:01&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="box"&gt;
+
+
+&lt;h2&gt;Weather Forecast for {{::data.weather.location }} &lt;br&gt;(next {{::data.weather.hours}})  &lt;/h2&gt;
+   
+  
+  &lt;h3&gt;{{::data.weather.desc}}&lt;/h3&gt;
+ &lt;div class="row"&gt;
+ &lt;div class="col-sm-6"&gt;
+  &lt;img src="https://www.weatherbit.io/static/img/icons/{{::data.weather.icon}}.png"&gt;
+    &lt;/div&gt;
+   &lt;div class="col-sm-6"&gt;
+     
+   
+ &lt;div class="stats"&gt;
+
+   
+  &lt;b&gt;Temperature:&lt;/b&gt; {{::data.weather.temp}} °C&lt;br&gt;
+   &lt;b&gt;Wind Speed:&lt;/b&gt; {{data.weather.windspd}} m/s&lt;br&gt; 
+    &lt;b&gt;Amount of Rain:&lt;/b&gt; {{data.weather.precip}} mm&lt;br&gt; 
+   
+     &lt;/div&gt;
+   
+   &lt;span class="time"&gt;Forecast made at {{::data.weather.ob_time}}&lt;/span&gt;
+   
+   &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1588092870</payload_hash>
+<remote_update_set display_value="Weather Widget">c2239a78db030010f79c146139961995</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-02-16 08:45:11</sys_created_on>
+<sys_id>c6239a78db030010f79c146139961995</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16cdd133f700000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-02-16 08:45:11</sys_updated_on>
+<table/>
+<target_name>Weather at Location</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>25ec027d5ea33300c5f7849891f084eb</update_guid>
+<update_guid_history>25ec027d5ea33300c5f7849891f084eb:-1588092870,2bdcc27d59a333002a45f8461aad6008:1275792713,accc427dd9a333009cf8aafecd2fa8aa:-1278952816,5cbc027d33a33300b0b24c42ddef27b5:-1968281343,b37c8e3d30a33300a64bd5f815d60e9d:-544630230,7e6c463dd7a333004d37bb9fd6b49840:-1528202950,2f4d166ddb97f7009fbec994c10ff77f:1467351268,c62d522d3e97f70076cb9e8a585b5e6b:-12514394,71ec526d4297f700699bcdbe0595cc86:103603460,bbacde2db597f700f411be318b4f1e3c:-1141486128,0f9c9e2d1697f700bf5eba19daa90881:-732424382,c9c852697397f7008de616e9efcf71ca:-507221045,32f012d1131fb700c9a10b8da74b8f8f:-1404995815,5de012d13a1fb7007e31e74e7444899b:-1043167776,36d05ad1e41fb70009de3986f57de746:940678039,77c01ad1581fb7007730aef8c027d4a3:-1404995815,e6ae8211281fb7001572c9993d5b2a97:626285945,f58e4a11ca1fb700439c1d6574bed8f8:-1020542424,177eca11fb1fb70051d3eb306ada1452:-633813144,112e4611851fb700ed40d1af3cbdd2c0:-100155763,ce0d46113a1fb7001afd7fe34c9119a9:-1638875748,a78ace1d35dbb7002f2c77b0d39aad3c:-1184325914,1a7aca5dc6dbb700df913aa0cccff9c3:-1638875748,f8a9029d30dbb7004a89daa4c9f2e805:926360396,f4c04d0df19f7700be186c84c3832ba4:-433045712,37704d0d229f77004cbb7a2edc549769:1201464030,eb20450de49f7700a23481471f4ffe46:20627340,75cf740d009f7700a17a58464f91a124:-752444492,b8bf340d739f7700cee16bb325fb9b6d:-16799036,9d9ffcc9059f77009f889cfc6ecf4cab:-409504057,a78f761048973700f7e45e8d09a7a081:-390373905,4d8f7a54c45737008e226bc88d78f780:-768197004,0496fe1886573700272f5b3953ddc82c:450802014,9076ba1829573700996dd0bf7a7b559d:794324390,7326f698d2573700b368ec3623eb1a04:1555966461,1df3ba1842573700764f45082a9a99cb:-386880963,b6d3fe186d573700e9c22d86d4b2ba0e:1520443486,2f63ba184857370051c8f679d1726a8b:-386880963,f513b618e057370011035ace2d877cf3:-1763412802,d9927218655737004c7c442717fb7dd7:1415672410,1e12be541f5737006abc8bd969f16025:-372883358,66613e147257370029254d32e39ae770:-754403337,f4ae2654c75737009ff43bc38d549bbd:1358906802,312e26540b5737007854748f371c7760:-1498829210,81bdee1499573700d7b37fef179c7808:1983056888,897d2e146c573700ac463ce361227558:-1877167480,d59bb1c4915bf3006ff4abb1ac2451d4:-1755008997,a2d87984e35bf30089754617465a8a96:-1704303999,fab83984d65bf300fa2d3f812734db12:-1236299386,62883184b45bf300b4942e2cb4d909a9:-1805129790,1978bd44065bf300e7cf1da2d65165dc:251222296,8f17f544995bf300884ec3520b75904f:1200394273,4f6e2100e55bf30010e0864536f8b933:-200687441,b32ead4c5f1bf30063ac400c8f62899f:1813513502,219de5cc951bf300ec7e173f75b9b19c:425066468,4097e1c8af1bf3004e0e828dddcbc8d3:-1446247669,99672d88bb1bf3007595451e1c7bcdcb:511443995,bcc6e988b51bf300f46d82faa62abff8:1849614831</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
